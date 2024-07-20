@@ -142,20 +142,3 @@ cython_debug/
 *.pt
 *.pth
 *.onnx
-
-# Datasets
-*.csv
-*.tsv
-*.xlsx
-*.xls
-*.json
-*.xml
-*.yaml
-*.yml
-*.pickle
-*.zip
-*.tar.gz
-*.tgz
-*.bz2
-*.rar
-*.gz
