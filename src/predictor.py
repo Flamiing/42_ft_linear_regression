@@ -1,5 +1,5 @@
 from pandas import read_csv
-from errors import exit_with_error, ErrorMessage
+from utils.errors import exit_with_error, ErrorMessage
 import sys
 
 
