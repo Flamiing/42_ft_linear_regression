@@ -2,7 +2,8 @@ from enum import Enum
 
 
 class ErrorMessage(Enum):
-    ONLY_INT_ACCEPTED = 'Invalid input. Only integers are accepted.'
+    ONLY_NUM_ACCEPTED = 'Only numbers are accepted. Try again.'
+    NEGATIVE_INPUT = 'Negative input is not accepted. Try again.'
     INVALID_HEADER = 'Invalid file. Header is not valid.'
     WRONG_NUM_ROWS = 'Invalid file. Wrong number of rows in the Thetas csv file.'
     WRONG_NUM_COLUMNS = 'Invalid file. Wrong number of columns'
