@@ -1,12 +1,13 @@
 from pandas import read_csv
 from utils.errors import exit_with_error, ErrorMessage
+from utils.linear_regression import LinearRegression
 import sys
 
 
 def main():
     mileage = get_mileage()
     thetas = get_thetas()
-    price_prediction = thetas['theta0'] + (thetas['theta1'] * mileage)
+    price_prediction = LinearRegression().predict(thetas, mileage)
     if price_prediction < 0:
         print('Predicted price is inferior than 0€')
     else:

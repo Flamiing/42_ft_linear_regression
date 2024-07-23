@@ -1,6 +1,6 @@
 class LinearRegression():
 
-    def __init__(self, x, y, m, learning_rate):
+    def __init__(self, x=None, y=None, m=None, learning_rate=None):
         self.x = x # Mileage in this case
         self.y = y # Price in this case
         self.learning_rate = learning_rate
@@ -27,3 +27,7 @@ class LinearRegression():
             self.thetas['theta1'] = self.__calculate_gradient1(prediction, self.y[i], self.x[i])
         
         return self.thetas
+
+    def predict(self, thetas, x):
+        self.thetas = thetas
+        return self.__estimate(x)
