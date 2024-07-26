@@ -1,30 +1,44 @@
+import numpy as np
+
+
 class LinearRegression():
 
-    def __init__(self, x=None, y=None, m=None, learning_rate=None):
-        self.x = x # Mileage in this case
-        self.y = y # Price in this case
+    def __init__(self, x=None, y=None, num_iterations=None, learning_rate=None):
+        self.x = np.array(x) # Mileage in this case
+        self.y = np.array(y) # Price in this case
         self.learning_rate = learning_rate
         self.thetas = {
-            'theta0': 0,
-            'theta1': 0
+            'theta0': 0.0,
+            'theta1': 0.0
         }
-        self.m = m # Number of training examples
+        self.num_iterations = num_iterations # Number of training examples
     
     def __estimate(self, x):
         return self.thetas['theta0'] + (self.thetas['theta1'] * x)
     
-    def __calculate_gradient0(self, prediction, y):
-        return self.learning_rate * (prediction - y)
+    def __mean(self, values):
+        return sum(values) / len(values)
+    
+    def __calculate_gradient0(self, predictions):
+        return self.learning_rate * sum(predictions - self.y) / self.num_iterations
 
-    def __calculate_gradient1(self, prediction, x, y):
-        return self.learning_rate * (prediction - y) * x
+    def __calculate_gradient1(self, predictions):
+        return self.learning_rate * sum((predictions - self.y) * self.x) / self.num_iterations
     
     def linear_regression(self):
-        for i in range(self.m):
-            prediction = self.__estimate(self.x[i])
+        tmp_thetas = {
+            'theta0': 0.0,
+            'theta1': 0.0
+        }
+        
+        for _ in range(self.num_iterations):
+            predictions = self.__estimate(self.x)
             
-            self.thetas['theta0'] = self.__calculate_gradient0(prediction, self.y[i])
-            self.thetas['theta1'] = self.__calculate_gradient1(prediction, self.y[i], self.x[i])
+            tmp_thetas['theta0'] = self.__calculate_gradient0(predictions)
+            tmp_thetas['theta1'] = self.__calculate_gradient1(predictions)
+            
+            self.thetas['theta0'] -= tmp_thetas['theta0']
+            self.thetas['theta1'] -= tmp_thetas['theta1']
         
         return self.thetas
 
