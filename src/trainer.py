@@ -34,7 +34,7 @@ def main():
     price = [3650, 3800, 4400, 4450, 5250, 5350, 5800, 5990, 5999, 6200, 6390, 6390, 6600, 6800, 6800, 6900, 6900, 6990, 7490, 7555, 7990, 7990, 7990, 8290]
 
     model = LinearRegression(mileage, price, len(DATA), 0.01)
-    
+
     thetas = model.linear_regression()
     print(thetas)
     
