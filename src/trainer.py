@@ -1,4 +1,5 @@
 from utils.linear_regression import LinearRegression
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -32,10 +33,25 @@ def main():
     mileage = [240000, 139800, 150500, 185530, 176000, 114800, 166800, 89000, 144500, 84000, 82029, 63060, 74000, 97500, 67000, 76025, 48235, 93000, 60949, 65674, 54000, 68500, 22899, 61789]
     price = [3650, 3800, 4400, 4450, 5250, 5350, 5800, 5990, 5999, 6200, 6390, 6390, 6600, 6800, 6800, 6900, 6900, 6990, 7490, 7555, 7990, 7990, 7990, 8290]
 
-    model = LinearRegression(mileage, price, len(DATA), 1e-10)
+    model = LinearRegression(mileage, price, len(DATA), 0.01)
     
     thetas = model.linear_regression()
     print(thetas)
+    
+    
+    # MAKE GRAPH
+    plt.scatter(mileage, price, color='blue', label='Data Points')
+
+    x_values = range(min(mileage), max(mileage))
+    y_values = [thetas['theta0'] + thetas['theta1'] * x for x in x_values]
+    plt.plot(x_values, y_values, color='red', label='Regression Line')
+
+    plt.xlabel('Mileage')
+    plt.ylabel('Price')
+    plt.title('Linear Regression of Car Prices based on Mileage')
+    plt.legend()
+
+    plt.show()
 
 if __name__ == '__main__':
     main()
