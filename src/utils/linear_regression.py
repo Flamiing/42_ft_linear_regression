@@ -3,19 +3,17 @@ import numpy as np
 
 class LinearRegression():
 
-    def __init__(self, x=[], y=[], m=None, learning_rate=None, epoch=1000):
-        self.raw_x = x
-        self.raw_y = y
+    def __init__(self, x=None, y=None, learning_rate=0.1, epoch=1000):
+        self.raw_x = x if x is not None else []
+        self.raw_y = y if y is not None else []
         self.x = np.array(self.__normalizer(x)) # Mileage in this case
         self.y = np.array(self.__normalizer(y)) # Price in this case
-
         self.learning_rate = learning_rate
+        self.epoch = epoch
         self.thetas = {
             'theta0': 0.0,
             'theta1': 0.0
         }
-        self.m = m # Number of training examples
-        self.epoch = epoch
 
     def __estimate(self, x):
         return self.thetas['theta0'] + (self.thetas['theta1'] * x)
@@ -35,16 +33,15 @@ class LinearRegression():
         min_y = min(self.raw_y)
         max_x = max(self.raw_x)
         min_x = min(self.raw_x)
-        
+
         self.thetas['theta1'] = self.thetas['theta1'] * (max_y - min_y) / (max_x - min_x)
         self.thetas['theta0'] = self.thetas['theta0'] * (max_y - min_y) + min_y - self.thetas['theta1'] * min_x
 
     def linear_regression(self):
-        
         for _ in range(self.epoch):
             predictions = self.__estimate(self.x)
             errors = predictions - self.y
-            
+
             self.thetas['theta0'] -= self.learning_rate * np.mean(errors)
             self.thetas['theta1'] -= self.learning_rate * np.mean(errors * self.x)
 

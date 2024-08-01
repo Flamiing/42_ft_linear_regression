@@ -6,9 +6,9 @@ class ErrorMessage(Enum):
     NEGATIVE_INPUT = 'Negative input is not accepted. Try again.'
     INVALID_HEADER = 'Invalid file. Header is not valid.'
     WRONG_NUM_ROWS = 'Invalid file. Wrong number of rows in the Thetas csv file.'
-    WRONG_NUM_COLUMNS = 'Invalid file. Wrong number of columns'
+    WRONG_NUM_COLUMNS = 'Invalid file. Wrong number of columns.'
     INVALID_THETAS = 'Invalid file. Invalid Thetas in CSV file.'
-    
+
     def __str__(self):
         return self.value
 
