@@ -38,21 +38,6 @@ def main():
     thetas = model.linear_regression()
 
     print(thetas)
-    
-    
-    # MAKE GRAPH
-    plt.scatter(mileage, price, color='blue', label='Data Points')
-
-    x_values = range(min(mileage), max(mileage))
-    y_values = [thetas['theta0'] + thetas['theta1'] * x for x in x_values]
-    plt.plot(x_values, y_values, color='red', label='Regression Line')
-
-    plt.xlabel('Mileage')
-    plt.ylabel('Price')
-    plt.title('Linear Regression of Car Prices based on Mileage')
-    plt.legend()
-
-    plt.show()
 
 if __name__ == '__main__':
     main()
