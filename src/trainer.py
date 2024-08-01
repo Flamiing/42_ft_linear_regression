@@ -36,6 +36,7 @@ def main():
     model = LinearRegression(mileage, price, len(DATA), 0.01)
 
     thetas = model.linear_regression()
+
     print(thetas)
     
     
