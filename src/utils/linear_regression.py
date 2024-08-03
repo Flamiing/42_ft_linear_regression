@@ -1,9 +1,12 @@
+import os
 import numpy as np
+import pandas as pd
+from utils.errors import ErrorHandler
 
 
 class LinearRegression():
 
-    def __init__(self, x=None, y=None, learning_rate=0.1, epoch=1000):
+    def __init__(self, thetas_file_path=None, x=None, y=None, learning_rate=0.1, epoch=1000):
         if x is not None and y is not None:
             self.raw_x = x
             self.raw_y = y
@@ -11,6 +14,7 @@ class LinearRegression():
             self.y = np.array(self.__normalizer(y)) # Price in this case
             self.learning_rate = learning_rate
             self.epoch = epoch
+            self.path = thetas_file_path if thetas_file_path else '.'
             self.thetas = {
                 'theta0': 0.0,
                 'theta1': 0.0
@@ -38,7 +42,16 @@ class LinearRegression():
         self.thetas['theta1'] = self.thetas['theta1'] * (max_y - min_y) / (max_x - min_x)
         self.thetas['theta0'] = self.thetas['theta0'] * (max_y - min_y) + min_y - self.thetas['theta1'] * min_x
 
-    def linear_regression(self):
+    def __save_thetas(self):
+        df = pd.DataFrame([self.thetas])
+        path = os.path.join(self.path, 'thetas.csv')
+        try: 
+            df.to_csv(path, index=False, encoding='utf-8')
+        except Exception as e:
+            ErrorHandler.exit_with_error(e)
+        print(f"Thetas file successfuly saved at '{path}'.")
+
+    def linear_regression(self, save_result):
         for _ in range(self.epoch):
             predictions = self.__estimate(self.x)
             errors = predictions - self.y
@@ -47,6 +60,9 @@ class LinearRegression():
             self.thetas['theta1'] -= self.learning_rate * np.mean(errors * self.x)
 
         self.__denormalize_thetas()
+        
+        if save_result:
+            self.__save_thetas()
 
         return self.thetas
 

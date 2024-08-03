@@ -143,4 +143,4 @@ cython_debug/
 *.pth
 *.onnx
 
-test.py
+test*
