@@ -1,4 +1,6 @@
 import sys
+import argparse
+import pathlib
 from pandas import read_csv
 from utils.errors import ErrorHandler
 from utils.linear_regression import LinearRegression
@@ -34,9 +36,10 @@ def validate_csv(csv_file):
         if num_rows != 2:
             ErrorHandler.exit_with_error(ErrorHandler.WRONG_NUM_ROWS)
 
-def get_thetas():
+def get_thetas(path):
+    file_path = path if path else '../data/thetas.csv'
     try:
-        thetas_csv = read_csv('../data/thetas.csv', sep=',')
+        thetas_csv = read_csv(file_path, sep=',')
         validate_csv(thetas_csv)
     except Exception as e:
         ErrorHandler.exit_with_error(e)
@@ -52,9 +55,19 @@ def get_thetas():
         }
     return thetas
 
+def args_parser():
+    parser = argparse.ArgumentParser(prog='predictor.py', description="Predicts the price based on the specified mileage.")
+
+    parser.add_argument('-p', '--path', type=pathlib.Path, help='Specify the path to the thetas.csv file.')
+
+    args = parser.parse_args()
+
+    return args
+
 def main():
+    args = args_parser()
     mileage = get_mileage()
-    thetas = get_thetas()
+    thetas = get_thetas(args.path)
     price_prediction = LinearRegression().predict(thetas, mileage)
     if price_prediction < 0:
         print('Predicted price is inferior than 0€')
