@@ -1,4 +1,3 @@
-import sys
 import argparse
 import pathlib
 from pandas import read_csv
@@ -59,6 +58,7 @@ def args_parser():
     parser = argparse.ArgumentParser(prog='predictor.py', description="Predicts the price based on the specified mileage.")
 
     parser.add_argument('-p', '--path', type=pathlib.Path, help='Specify the path to the thetas.csv file.')
+    parser.add_argument('-r', '--raw', help='Get raw price without getting it rounded.', action='store_true')
 
     args = parser.parse_args()
 
@@ -72,7 +72,7 @@ def main():
     if price_prediction < 0:
         print('Predicted price is inferior than 0€')
     else:
-        if len(sys.argv) > 1 and sys.argv[1] in ['-r', '--raw']:
+        if args.raw:
             print(f'Predicted Price: {price_prediction}€')
         else:
             print(f'Predicted Price: {round(price_prediction, 2)}€')
