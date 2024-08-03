@@ -4,16 +4,17 @@ import numpy as np
 class LinearRegression():
 
     def __init__(self, x=None, y=None, learning_rate=0.1, epoch=1000):
-        self.raw_x = x if x is not None else []
-        self.raw_y = y if y is not None else []
-        self.x = np.array(self.__normalizer(x)) # Mileage in this case
-        self.y = np.array(self.__normalizer(y)) # Price in this case
-        self.learning_rate = learning_rate
-        self.epoch = epoch
-        self.thetas = {
-            'theta0': 0.0,
-            'theta1': 0.0
-        }
+        if x is not None and y is not None:
+            self.raw_x = x
+            self.raw_y = y
+            self.x = np.array(self.__normalizer(x)) # Mileage in this case
+            self.y = np.array(self.__normalizer(y)) # Price in this case
+            self.learning_rate = learning_rate
+            self.epoch = epoch
+            self.thetas = {
+                'theta0': 0.0,
+                'theta1': 0.0
+            }
 
     def __estimate(self, x):
         return self.thetas['theta0'] + (self.thetas['theta1'] * x)
