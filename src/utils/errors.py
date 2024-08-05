@@ -2,9 +2,10 @@ class ErrorHandler():
     ONLY_NUM_ACCEPTED = 'Only numbers are accepted. Try again.'
     NEGATIVE_INPUT = 'Negative input is not accepted. Try again.'
     INVALID_HEADER = 'Invalid file. Header is not valid.'
-    WRONG_NUM_ROWS = 'Invalid file. Wrong number of rows in the Thetas csv file.'
+    WRONG_NUM_ROWS = 'Invalid file. Wrong number of rows in csv file.'
     WRONG_NUM_COLUMNS = 'Invalid file. Wrong number of columns.'
     INVALID_THETAS = 'Invalid file. Invalid Thetas in CSV file.'
+    COL_LEN_MISMATCH = 'Invalid file. There is a column length mismatch.'
 
     @staticmethod
     def exit_with_error(error_msg):

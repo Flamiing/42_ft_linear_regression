@@ -24,7 +24,7 @@ def get_thetas(path):
     try:
         thetas_csv = read_csv(file_path, sep=',')
         expected_header = ['theta0', 'theta1']
-        validate_csv(thetas_csv, expected_header, check_rows=True)
+        validate_csv(file_path, thetas_csv, expected_header, check_rows=True)
     except Exception as e:
         ErrorHandler.exit_with_error(e)
 
