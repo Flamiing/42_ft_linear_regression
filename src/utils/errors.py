@@ -6,7 +6,7 @@ class ErrorHandler():
     WRONG_NUM_COLUMNS = 'Invalid file. Wrong number of columns.'
     INVALID_THETAS = 'Invalid file. Invalid Thetas in CSV file.'
     COL_LEN_MISMATCH = 'Invalid file. There is a column length mismatch.'
-    WRONG_DATA_IN_DATASET = 'Invalid file. There is wrong data in the dataset.'
+    WRONG_DATA_IN_DATASET = 'Invalid file. There is unexpected data in the dataset.'
 
     @staticmethod
     def exit_with_error(error_msg):

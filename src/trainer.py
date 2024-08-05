@@ -35,10 +35,10 @@ def get_data(file_path):
         validate_csv(file_path, data_csv, expected_header)
         
         data = {
-            'mileage': float(np.array(data_csv.km)),
-            'price': float(np.array(data_csv.price))
+            'mileage': np.array(data_csv.km, dtype=float),
+            'price': np.array(data_csv.price, dtype=float)
         }
-    except TypeError:
+    except ValueError:
         ErrorHandler.exit_with_error(ErrorHandler.WRONG_DATA_IN_DATASET)
     except Exception as e:
         ErrorHandler.exit_with_error(e)
