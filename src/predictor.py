@@ -25,18 +25,18 @@ def get_thetas(path):
         thetas_csv = read_csv(file_path, sep=',')
         expected_header = ['theta0', 'theta1']
         validate_csv(file_path, thetas_csv, expected_header, check_rows=True)
-    except Exception as e:
-        ErrorHandler.exit_with_error(e)
-
-    try:
+        
         theta_zero = float(thetas_csv.theta0.values[0])
         theta_one = float(thetas_csv.theta1.values[0])
     except (ValueError, IndexError):
         ErrorHandler.exit_with_error(ErrorHandler.INVALID_THETAS)
+    except Exception as e:
+        ErrorHandler.exit_with_error(e)
+
     thetas = {
-            'theta0': theta_zero,
-            'theta1': theta_one
-        }
+        'theta0': theta_zero,
+        'theta1': theta_one
+    }
     return thetas
 
 def args_parser():
