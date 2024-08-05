@@ -8,6 +8,7 @@ def args_parser():
 
     parser.add_argument('-s', '--save_thetas', help='Save the thetas in a thetas.csv file.', action='store_true')
     parser.add_argument('-p', '--path', type=pathlib.Path, help='Specify the path where thetas.csv file will be saved.')
+    parser.add_argument('-d', '--dataset', type=pathlib.Path, help='Specify the path to the dataset.')
 
     args = parser.parse_args()
 

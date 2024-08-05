@@ -3,6 +3,7 @@ import pathlib
 from pandas import read_csv
 from utils.errors import ErrorHandler
 from utils.linear_regression import LinearRegression
+from utils.validators import validate_csv
 
 
 def get_mileage():
@@ -14,32 +15,16 @@ def get_mileage():
             print(ErrorHandler.NEGATIVE_INPUT)
         except ValueError:
             print(ErrorHandler.ONLY_NUM_ACCEPTED)
-
-def validate_csv(csv_file):
-    EXPECTED_HEADER = ['theta0', 'theta1']
-    NUM_COLUMNS = 2
-
-    if list(csv_file.columns) != EXPECTED_HEADER:
-        ErrorHandler.exit_with_error(ErrorHandler.INVALID_HEADER)
-
-    with open('../data/thetas.csv', mode='r', encoding='utf-8') as file:
-        num_rows = 0
-        for row_index, row in enumerate(file):
-            num_rows += 1
-            if row_index > 2:
-                ErrorHandler.exit_with_error(ErrorHandler.WRONG_NUM_ROWS)
-            columns = row.strip().split(',')
-            if len(columns) > NUM_COLUMNS:
-                ErrorHandler.exit_with_error(ErrorHandler.WRONG_NUM_COLUMNS)
-
-        if num_rows != 2:
-            ErrorHandler.exit_with_error(ErrorHandler.WRONG_NUM_ROWS)
+        except (KeyboardInterrupt, EOFError):
+            print('\nProgram closed successfuly.')
+            exit(0)
 
 def get_thetas(path):
     file_path = path if path else '../data/thetas.csv'
     try:
         thetas_csv = read_csv(file_path, sep=',')
-        validate_csv(thetas_csv)
+        expected_header = ['theta0', 'theta1']
+        validate_csv(thetas_csv, expected_header, check_rows=True)
     except Exception as e:
         ErrorHandler.exit_with_error(e)
 
