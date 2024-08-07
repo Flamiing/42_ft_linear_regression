@@ -16,8 +16,7 @@ def get_mileage():
         except ValueError:
             print(ErrorHandler.ONLY_NUM_ACCEPTED)
         except (KeyboardInterrupt, EOFError):
-            print('\nProgram closed successfuly.')
-            exit(0)
+            ErrorHandler.closed_successfully()
 
 def get_thetas(path):
     file_path = path if path else '../data/thetas.csv'

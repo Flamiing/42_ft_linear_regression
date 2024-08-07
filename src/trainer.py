@@ -4,6 +4,7 @@ import numpy as np
 from pandas import read_csv
 from utils.linear_regression import LinearRegression
 from utils.errors import ErrorHandler
+from utils.data_plotter import DataPlotter
 from utils.validators import validate_csv
 
 
@@ -13,6 +14,7 @@ def args_parser():
     parser.add_argument('-d', '--dataset_path', type=pathlib.Path, help='Specify the path to the dataset.')
     parser.add_argument('-s', '--save_thetas', help='Save the thetas in a thetas.csv file.', action='store_true')
     parser.add_argument('-t', '--thetas_path', type=pathlib.Path, help='Specify the path where thetas.csv file will be saved.')
+    parser.add_argument('--show_data', help='Use this flag to plot the data into a graph.', action='store_true')
 
     args = parser.parse_args()
 
@@ -25,8 +27,8 @@ def args_parser():
 
 def linear_regression(args, data):
     model = LinearRegression(args.thetas_path, x=data['mileage'], y=data['price'])
-
     thetas = model.linear_regression(args.save_thetas)
+    return thetas
 
 def get_data(file_path):
     try:
@@ -48,7 +50,10 @@ def get_data(file_path):
 def main():
     args = args_parser()
     data = get_data(args.dataset_path)
-    linear_regression(args, data)
+    thetas = linear_regression(args, data)
+    if args.show_data:
+        data_plotter = DataPlotter(data['mileage'], data['price'], thetas)
+        data_plotter.show()
 
 if __name__ == '__main__':
     main()

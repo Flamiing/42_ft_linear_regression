@@ -12,3 +12,8 @@ class ErrorHandler():
     def exit_with_error(error_msg):
         print(f'Error: {error_msg}')
         exit(1)
+    
+    @staticmethod
+    def closed_successfully():
+        print('\nProgram closed successfuly.')
+        exit(0)
