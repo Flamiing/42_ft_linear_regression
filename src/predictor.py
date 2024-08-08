@@ -1,9 +1,8 @@
 import argparse
 import pathlib
-from pandas import read_csv
 from utils.errors import ErrorHandler
 from utils.linear_regression import LinearRegression
-from utils.validators import validate_csv
+from utils.file_utils import get_thetas
 
 
 def get_mileage():
@@ -17,26 +16,6 @@ def get_mileage():
             print(ErrorHandler.ONLY_NUM_ACCEPTED)
         except (KeyboardInterrupt, EOFError):
             ErrorHandler.closed_successfully()
-
-def get_thetas(path):
-    file_path = path if path else '../data/thetas.csv'
-    try:
-        thetas_csv = read_csv(file_path, sep=',')
-        expected_header = ['theta0', 'theta1']
-        validate_csv(file_path, thetas_csv, expected_header, check_rows=True)
-        
-        theta_zero = float(thetas_csv.theta0.values[0])
-        theta_one = float(thetas_csv.theta1.values[0])
-    except (ValueError, IndexError):
-        ErrorHandler.exit_with_error(ErrorHandler.INVALID_THETAS)
-    except Exception as e:
-        ErrorHandler.exit_with_error(e)
-
-    thetas = {
-        'theta0': theta_zero,
-        'theta1': theta_one
-    }
-    return thetas
 
 def args_parser():
     parser = argparse.ArgumentParser(prog='predictor.py', description="Predicts the price based on the specified mileage.")

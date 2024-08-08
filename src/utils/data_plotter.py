@@ -5,7 +5,6 @@ from utils.errors import ErrorHandler
 
 
 class DataPlotter():
-
     def __init__(self, x, y, thetas):
         self.x = x
         self.y = y

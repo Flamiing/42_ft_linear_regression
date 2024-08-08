@@ -5,7 +5,6 @@ from utils.errors import ErrorHandler
 
 
 class LinearRegression():
-
     def __init__(self, thetas_file_path=None, x=None, y=None, learning_rate=0.1, epoch=1000):
         if x is not None and y is not None:
             self.raw_x = x

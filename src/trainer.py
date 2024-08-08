@@ -1,11 +1,8 @@
 import argparse
 import pathlib
-import numpy as np
-from pandas import read_csv
 from utils.linear_regression import LinearRegression
-from utils.errors import ErrorHandler
 from utils.data_plotter import DataPlotter
-from utils.validators import validate_csv
+from utils.file_utils import get_data
 
 
 def args_parser():
@@ -26,26 +23,9 @@ def args_parser():
     return args
 
 def linear_regression(args, data):
-    model = LinearRegression(args.thetas_path, x=data['mileage'], y=data['price'])
+    model = LinearRegression(args.thetas_path, x=data['x'], y=data['y'])
     thetas = model.linear_regression(args.save_thetas)
     return thetas
-
-def get_data(file_path):
-    try:
-        data_csv = read_csv(file_path, sep=',')
-        expected_header = ['km', 'price']
-        validate_csv(file_path, data_csv, expected_header)
-        
-        data = {
-            'mileage': np.array(data_csv.km, dtype=float),
-            'price': np.array(data_csv.price, dtype=float)
-        }
-    except ValueError:
-        ErrorHandler.exit_with_error(ErrorHandler.WRONG_DATA_IN_DATASET)
-    except Exception as e:
-        ErrorHandler.exit_with_error(e)
-    
-    return data
 
 def main():
     args = args_parser()
