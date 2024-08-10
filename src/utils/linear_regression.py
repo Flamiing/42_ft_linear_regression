@@ -1,7 +1,6 @@
 import os
 import numpy as np
-import pandas as pd
-from utils.errors import ErrorHandler
+from utils.file_utils import save_to_csv
 
 
 class LinearRegression():
@@ -41,15 +40,6 @@ class LinearRegression():
         self.thetas['theta1'] = self.thetas['theta1'] * (max_y - min_y) / (max_x - min_x)
         self.thetas['theta0'] = self.thetas['theta0'] * (max_y - min_y) + min_y - self.thetas['theta1'] * min_x
 
-    def __save_thetas(self):
-        df = pd.DataFrame([self.thetas])
-        path = os.path.join(self.path, 'thetas.csv')
-        try: 
-            df.to_csv(path, index=False, encoding='utf-8')
-        except Exception as e:
-            ErrorHandler.exit_with_error(e)
-        print(f"Thetas file successfuly saved at '{path}'.")
-
     def linear_regression(self, save_result):
         for _ in range(self.epoch):
             predictions = self.__estimate(self.x)
@@ -61,7 +51,7 @@ class LinearRegression():
         self.__denormalize_thetas()
         
         if save_result:
-            self.__save_thetas()
+            save_to_csv(self.path, [(self.thetas['theta0'], self.thetas['theta1'])], ['theta0', 'theta1'], 'thetas')
 
         return self.thetas
 

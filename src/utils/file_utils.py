@@ -1,4 +1,6 @@
+import os
 import numpy as np
+import pandas as pd
 from pandas import read_csv
 from utils.validators import validate_csv
 from utils.errors import ErrorHandler
@@ -40,3 +42,15 @@ def get_data(file_path):
         ErrorHandler.exit_with_error(e)
     
     return data
+
+def save_to_csv(raw_path, data_points, columns, filename='data'):
+    path = raw_path if raw_path else '.'
+
+    df = pd.DataFrame(data_points, columns=columns)
+
+    path = os.path.join(path, f'{filename}.csv')
+    try:
+        df.to_csv(path, index=False, encoding='utf-8')
+    except Exception as e:
+        ErrorHandler.exit_with_error(e)
+    print(f"Data successfully saved at '{path}'.")

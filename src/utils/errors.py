@@ -14,6 +14,6 @@ class ErrorHandler():
         exit(1)
     
     @staticmethod
-    def closed_successfully():
+    def close_successfully():
         print('\nProgram closed successfuly.')
         exit(0)

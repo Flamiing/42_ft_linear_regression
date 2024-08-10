@@ -28,4 +28,4 @@ class DataPlotter():
         try:
             plt.show()
         except KeyboardInterrupt:
-            ErrorHandler.closed_successfully()
+            ErrorHandler.close_successfully()

@@ -15,7 +15,7 @@ def get_mileage():
         except ValueError:
             print(ErrorHandler.ONLY_NUM_ACCEPTED)
         except (KeyboardInterrupt, EOFError):
-            ErrorHandler.closed_successfully()
+            ErrorHandler.close_successfully()
 
 def args_parser():
     parser = argparse.ArgumentParser(prog='predictor.py', description="Predicts the price based on the specified mileage.")

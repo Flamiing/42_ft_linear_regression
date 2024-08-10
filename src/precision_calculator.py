@@ -7,7 +7,7 @@ from utils.linear_regression import LinearRegression
 
 
 def args_parser():
-    parser = argparse.ArgumentParser(prog='predictor.py', description="Predicts the price based on the specified mileage.")
+    parser = argparse.ArgumentParser(prog='precision_calculator.py', description="Calculates the precision of a linear regression model.")
 
     parser.add_argument('-d', '--dataset_path', type=pathlib.Path, help='Specify the path to the dataset.')
     parser.add_argument('-t', '--thetas_path', type=pathlib.Path, help='Specify the path to the thetas file.')
