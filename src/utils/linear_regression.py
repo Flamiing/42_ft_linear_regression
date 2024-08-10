@@ -1,4 +1,3 @@
-import os
 import numpy as np
 from utils.file_utils import save_to_csv
 

@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 from utils.linear_regression import LinearRegression
 from utils.errors import ErrorHandler
 

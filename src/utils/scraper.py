@@ -1,6 +1,5 @@
 import requests
 import re
-import numpy as np
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 from utils.errors import ErrorHandler

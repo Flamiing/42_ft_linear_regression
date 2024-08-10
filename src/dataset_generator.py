@@ -1,5 +1,6 @@
 import argparse
 import pathlib
+from time import sleep
 from utils.url import URL
 from utils.scraper import Scraper
 from utils.errors import ErrorHandler
@@ -25,6 +26,7 @@ def scraping(args):
     except (KeyboardInterrupt, EOFError):
         ErrorHandler.close_successfully()
 
+    sleep(1)
     save_to_csv(args.path, data_points, columns=['km', 'price'])
 
 def main():
