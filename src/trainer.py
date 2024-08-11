@@ -32,7 +32,7 @@ def main():
     data = get_data(args.dataset_path)
     thetas = linear_regression(args, data)
     if args.show_data:
-        data_plotter = DataPlotter(data['mileage'], data['price'], thetas)
+        data_plotter = DataPlotter(data['x'], data['y'], thetas)
         data_plotter.show()
 
 if __name__ == '__main__':
