@@ -28,7 +28,7 @@ class Scraper():
     def __get_all_cars_from_page(self):
         scraped_html = self.__extract_hmtl()
         
-        raw_cars = scraped_html.find('div', class_='Grid-module_grid__h49fk ResultsCardGrid_searcher-classified-card-grid__3q2mR')
+        raw_cars = scraped_html.find('div', class_='Grid-module_grid__h49fk ResultsCardGrid_searcher-classified-card-grid__Pf8Nx')
         if not raw_cars:
             self.end = True
             return
